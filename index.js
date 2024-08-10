@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 modHashCode = hashCode % size
             }
      
-            console.log(modHashCode)
+            console.log({modHashCode})
             return modHashCode;
         } 
 
@@ -26,18 +26,18 @@ document.addEventListener('DOMContentLoaded', function(){
                 buckets[index] = []
                 let keyValuePair = {key: key, value: value}
                 buckets[index].push(keyValuePair)
-                console.log(buckets)
+                console.log({buckets})
             } else {
                 let keyValuePair = {key: key, value: value}
                 for (let i = 0; i < buckets[index].length; i++) {
                     if (buckets[index][i].key === keyValuePair.key){
-                        buckets[index][i].value = keyValuePair
-                        console.log(buckets)
-                    } else {
-                        buckets[index][i].push(keyValuePair)
-                        console.log(buckets)
+                        buckets[index][i].value = keyValuePair.value
+                        console.log({buckets})
+                        return
                     }
                 }
+                buckets[index].push(keyValuePair)
+                console.log({buckets})
             }
 
         }
@@ -48,6 +48,11 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 
     }
+
+    // let test = new hashMap()
+
+    // test.set('test', 2)
+    // test.set('test', 3)
 
 
 
