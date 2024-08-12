@@ -69,13 +69,26 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
 
-        
+        function remove(key) {
+            let index = hash(key)
+            if (buckets[index] !== null) {
+                for (let i = 0; i < buckets.length; i++) {
+                    if (key === buckets[index][i].key) {
+                        buckets[index] = null
+                        return
+                    }
+                }
+            } else {
+                console.log('False')
+            }
+        }
 
         return {
             hash,
             set,
             get,
             has,
+            remove,
         }
 
     }
@@ -85,11 +98,15 @@ document.addEventListener('DOMContentLoaded', function(){
     test.set('test', 2)
     test.set('test2', 3)
 
-    test.get('test')
-    test.get('test1')
+    // test.get('test')
+    // test.get('test1')
 
-    test.has('test')
-    test.has('test1')
+    // test.has('test')
+    // test.has('test1')
+
+    // test.remove('test')
+    // test.remove('test1')
+
 
 
 
