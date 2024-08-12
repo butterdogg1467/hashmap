@@ -108,6 +108,21 @@ document.addEventListener('DOMContentLoaded', function(){
             return
         }
 
+        function keys(){
+            let keysArray = []
+            for (let i = 0; i < buckets.length; i++) {
+                if (buckets[i] !== null){
+                    for (let k = 0; k < buckets[i].length; k++) {
+                        if (buckets[i][i] !== null) {
+                            keysArray.push(buckets[i][k].key)
+                        }
+                    }
+                } 
+            }
+            console.log(keysArray)
+            return
+        }
+
         return {
             hash,
             set,
@@ -116,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function(){
             remove,
             length,
             clear,
+            keys,
         }
 
     }
@@ -137,6 +153,8 @@ document.addEventListener('DOMContentLoaded', function(){
     // test.length()
 
     // test.clear()
+    
+    // test.keys()
 
 
 
