@@ -99,6 +99,15 @@ document.addEventListener('DOMContentLoaded', function(){
             return
         }
 
+        function clear(){
+            let index = 0
+                for (let i = 0; i < buckets.length; i++) {
+                    buckets[index] = null
+                    index += 1
+                }
+            return
+        }
+
         return {
             hash,
             set,
@@ -106,6 +115,7 @@ document.addEventListener('DOMContentLoaded', function(){
             has,
             remove,
             length,
+            clear,
         }
 
     }
@@ -124,7 +134,9 @@ document.addEventListener('DOMContentLoaded', function(){
     // test.remove('test')
     // test.remove('test1')
 
-    test.length()
+    // test.length()
+
+    // test.clear()
 
 
 
