@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function(){
             for (let i = 0; i < buckets.length; i++) {
                 if (buckets[i] !== null){
                     for (let k = 0; k < buckets[i].length; k++) {
-                        if (buckets[i][i] !== null) {
+                        if (buckets[i][k] !== null) {
                             keysArray.push(buckets[i][k].key)
                         }
                     }
@@ -128,13 +128,32 @@ document.addEventListener('DOMContentLoaded', function(){
             for (let i = 0; i < buckets.length; i++) {
                 if (buckets[i] !== null){
                     for (let k = 0; k < buckets[i].length; k++) {
-                        if (buckets[i][i] !== null) {
+                        if (buckets[i][k] !== null) {
                             valuesArray.push(buckets[i][k].value)
                         }
                     }
                 } 
             }
             console.log(valuesArray)
+            return
+        }
+
+        function entries(){
+            let keyValueArray = []
+            let tempArray = []
+            for (let i = 0; i < buckets.length; i++) {
+                if (buckets[i] !== null){
+                    for (let k = 0; k < buckets[i].length; k++) {
+                        if (buckets[i][k] !== null) {
+                            tempArray.push(buckets[i][k].key)
+                            tempArray.push(buckets[i][k].value)
+                            keyValueArray.push(tempArray)
+                            tempArray = []
+                        }
+                    }
+                } 
+            }
+            console.log(keyValueArray)
             return
         }
 
@@ -148,6 +167,7 @@ document.addEventListener('DOMContentLoaded', function(){
             clear,
             keys,
             values,
+            entries
         }
 
     }
@@ -173,6 +193,8 @@ document.addEventListener('DOMContentLoaded', function(){
     // test.keys()
 
     // test.values()
+
+    // test.entries()
 
 
 
