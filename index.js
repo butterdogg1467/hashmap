@@ -83,12 +83,29 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
 
+        function length(){
+            let index = 0
+            let count = 0
+                for (let i = 0; i < buckets.length; i++) {
+                    if (buckets[index] !== null) {
+                        index += 1
+                        count += 1
+                    } else if (buckets[index] === null) {
+                        index += 1
+                    }
+                    
+                }
+            console.log(count)
+            return
+        }
+
         return {
             hash,
             set,
             get,
             has,
             remove,
+            length,
         }
 
     }
@@ -106,6 +123,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // test.remove('test')
     // test.remove('test1')
+
+    test.length()
 
 
 
