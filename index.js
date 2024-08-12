@@ -55,10 +55,27 @@ document.addEventListener('DOMContentLoaded', function(){
             }
         }
 
+        function has(key){
+            let index = hash(key)
+            if (buckets[index] !== null) {
+                for (let i = 0; i < buckets.length; i++) {
+                    if (key === buckets[index][i].key) {
+                        console.log('True ')
+                        return
+                    }
+                }
+            } else {
+                console.log('False')
+            }
+        }
+
+        
+
         return {
             hash,
             set,
             get,
+            has,
         }
 
     }
@@ -67,9 +84,13 @@ document.addEventListener('DOMContentLoaded', function(){
 
     test.set('test', 2)
     test.set('test2', 3)
+
     test.get('test')
-    test.get('test2')
     test.get('test1')
+
+    test.has('test')
+    test.has('test1')
+
 
 
 
