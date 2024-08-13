@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function(){
                 hashCode = primeNumber * hashCode + key.charCodeAt(i);
                 modHashCode = hashCode % size
             }
-            console.log({size})
             return modHashCode;
         } 
         
@@ -60,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function(){
                 buckets[index].push(keyValuePair)
             }
             console.log({buckets})
-
         }
 
         function get(key){
@@ -69,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 for (let i = 0; i < buckets[index].length; i++) {
                     if (key === buckets[index][i].key) {
                         console.log('True ' + buckets[index][i].value)
-                        return
+                        return buckets[index][i].value
                     }
                 }
             } else {
@@ -84,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 for (let i = 0; i < buckets[index].length; i++) {
                     if (key === buckets[index][i].key) {
                         console.log('True ')
-                        return
+                        return true
                     }
                 }
             } else {
@@ -105,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 }
             } else {
                 console.log('False')
+                return false
             }
         }
 
@@ -123,10 +122,10 @@ document.addEventListener('DOMContentLoaded', function(){
         function clear(){
             let index = 0
                 for (let i = 0; i < buckets.length; i++) {
-                    buckets[index] = null
+                    buckets[i] = null
                     index += 1
-                    numElements = 0
                 }
+                numElements = 0 
             return 
         }
 
@@ -142,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 } 
             }
             console.log(keysArray)
-            return
+            return keysArray
         }
 
         function values(){
@@ -157,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 } 
             }
             console.log(valuesArray)
-            return
+            return valuesArray
         }
 
         function entries(){
@@ -167,8 +166,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 if (buckets[i] !== null){
                     for (let k = 0; k < buckets[i].length; k++) {
                         if (buckets[i][k] !== null) {
-                            tempArray.push(buckets[i][k].key)
-                            tempArray.push(buckets[i][k].value)
+                            tempArray = [buckets[i][k].key, buckets[i][k].value]
                             keyValueArray.push(tempArray)
                             tempArray = []
                         }
@@ -176,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 } 
             }
             console.log(keyValueArray)
-            return
+            return keyValueArray
         }
 
 
@@ -214,7 +212,13 @@ document.addEventListener('DOMContentLoaded', function(){
     test.set('moon', 'silver')
     test.set('sun', 'gold')
 
-    test.length()
+    // test.get('hat')
+    
+    // test.has('jacket')
+
+    // test.remove('elephant')
+
+    // test.length()
 
     // test.clear()
     
@@ -224,9 +228,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // test.entries()
 
-    // test.remove('elephant')
 
-    // test.entries()
 
 
 
