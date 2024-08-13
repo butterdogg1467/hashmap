@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
     function hashMap(){
         let size = 16
         let buckets = new Array(size).fill(null)
+        let numElements = 0
         
         function hash(key) {
             let hashCode = 0
@@ -14,37 +15,58 @@ document.addEventListener('DOMContentLoaded', function(){
                 hashCode = primeNumber * hashCode + key.charCodeAt(i);
                 modHashCode = hashCode % size
             }
-     
+            console.log({size})
             return modHashCode;
         } 
-
         
         function set(key, value){
+            if (numElements / size > 0.75) {
+                let newSize = size * 2
+                let newBuckets = Array(newSize).fill(null)
+                size = newSize
+
+                for (let i = 0; i < buckets.length; i++) {
+                    if (buckets[i] !== null) {
+                        for (let k = 0; k < buckets[i].length; k++) {
+                                let oldKey = buckets[i][k].key
+                                let oldValue = buckets[i][k].value
+                                let newIndex = hash(oldKey)
+                                let newKeyValuePair = {key: oldKey, value: oldValue}
+
+                                if (newBuckets[newIndex] === null) {
+                                    newBuckets[newIndex] = []
+                                }
+                                newBuckets[newIndex].push(newKeyValuePair)
+                            
+                        }
+                    }
+                }
+                buckets = newBuckets
+            }
             let index = hash(key)
             if (buckets[index] === null) {
                 buckets[index] = []
                 let keyValuePair = {key: key, value: value}
                 buckets[index].push(keyValuePair)
-                console.log({buckets})
+                numElements = numElements + 1
             } else {
                 let keyValuePair = {key: key, value: value}
                 for (let i = 0; i < buckets[index].length; i++) {
                     if (buckets[index][i].key === keyValuePair.key){
                         buckets[index][i].value = keyValuePair.value
-                        console.log({buckets})
                         return
                     }
                 }
                 buckets[index].push(keyValuePair)
-                console.log({buckets})
             }
+            console.log({buckets})
 
         }
 
         function get(key){
             let index = hash(key)
             if (buckets[index] !== null) {
-                for (let i = 0; i < buckets.length; i++) {
+                for (let i = 0; i < buckets[index].length; i++) {
                     if (key === buckets[index][i].key) {
                         console.log('True ' + buckets[index][i].value)
                         return
@@ -52,13 +74,14 @@ document.addEventListener('DOMContentLoaded', function(){
                 }
             } else {
                 console.log('False')
+                return false
             }
         }
 
         function has(key){
             let index = hash(key)
             if (buckets[index] !== null) {
-                for (let i = 0; i < buckets.length; i++) {
+                for (let i = 0; i < buckets[index].length; i++) {
                     if (key === buckets[index][i].key) {
                         console.log('True ')
                         return
@@ -66,16 +89,18 @@ document.addEventListener('DOMContentLoaded', function(){
                 }
             } else {
                 console.log('False')
+                return false
             }
         }
 
         function remove(key) {
             let index = hash(key)
             if (buckets[index] !== null) {
-                for (let i = 0; i < buckets.length; i++) {
+                for (let i = 0; i < buckets[index].length; i++) {
                     if (key === buckets[index][i].key) {
-                        buckets[index] = null
-                        return
+                        buckets[index].splice(i, 1)
+                        numElements = numElements - 1
+                        return      
                     }
                 }
             } else {
@@ -84,19 +109,15 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 
         function length(){
-            let index = 0
             let count = 0
                 for (let i = 0; i < buckets.length; i++) {
-                    if (buckets[index] !== null) {
-                        index += 1
-                        count += 1
-                    } else if (buckets[index] === null) {
-                        index += 1
-                    }
+                    if (buckets[i] !== null) {
+                        count += buckets[i].length
+                    } 
                     
                 }
             console.log(count)
-            return
+            return count
         }
 
         function clear(){
@@ -104,8 +125,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 for (let i = 0; i < buckets.length; i++) {
                     buckets[index] = null
                     index += 1
+                    numElements = 0
                 }
-            return
+            return 
         }
 
         function keys(){
@@ -157,6 +179,7 @@ document.addEventListener('DOMContentLoaded', function(){
             return
         }
 
+
         return {
             hash,
             set,
@@ -167,26 +190,31 @@ document.addEventListener('DOMContentLoaded', function(){
             clear,
             keys,
             values,
-            entries
+            entries,
         }
 
     }
+    
 
     let test = new hashMap()
+    
+    
+    test.set('apple', 'red')
+    test.set('banana', 'yellow')
+    test.set('carrot', 'orange')
+    test.set('dog', 'brown')
+    test.set('elephant', 'gray')
+    test.set('frog', 'green')
+    test.set('grape', 'purple')
+    test.set('hat', 'black')
+    test.set('ice cream', 'white')
+    test.set('jacket', 'blue')
+    test.set('kite', 'pink')
+    test.set('lion', 'golden')
+    test.set('moon', 'silver')
+    test.set('sun', 'gold')
 
-    test.set('test', 2)
-    test.set('test2', 3)
-
-    // test.get('test')
-    // test.get('test1')
-
-    // test.has('test')
-    // test.has('test1')
-
-    // test.remove('test')
-    // test.remove('test1')
-
-    // test.length()
+    test.length()
 
     // test.clear()
     
@@ -196,6 +224,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // test.entries()
 
+    // test.remove('elephant')
+
+    // test.entries()
 
 
 
